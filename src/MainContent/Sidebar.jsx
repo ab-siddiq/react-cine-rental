@@ -1,8 +1,8 @@
-import commingSoon from "./assets/icons/commingSoon.svg";
-import favorite from "./assets/icons/favourite.svg";
-import newRealse from "./assets/icons/newRelease.svg";
-import trending from "./assets/icons/trending.svg";
-import watchLater from "./assets/icons/watchLater.svg";
+import commingSoon from ".././assets/icons/commingSoon.svg";
+import favorite from ".././assets/icons/favourite.svg";
+import newRealse from ".././assets/icons/newRelease.svg";
+import trending from ".././assets/icons/trending.svg";
+import watchLater from ".././assets/icons/watchLater.svg";
 export default function Sidebar() {
   return (
     <aside>
