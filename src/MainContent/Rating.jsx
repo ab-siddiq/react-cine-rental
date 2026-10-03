@@ -1,5 +1,3 @@
-import star from "../assets/star.svg";
-
 export default function Rating() {
   return (
     <div className="flex items-center space-x-1 mb-5">
