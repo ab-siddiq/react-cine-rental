@@ -1,7 +1,7 @@
-import tag from "./tag.svg";
-import { getImageUrl } from "./uttitlities/utility";
+import tag from "../assets/tag.svg";
+import { getImageUrl } from "../assets/uttitlities/utility";
 
-export default function MovieDetailsModal({ movie, onClose }) {
+export default function MovieDetailsModal({ movie, onClose, onCartAdd }) {
   return (
     <div className="fixed top-0 left-0 flex w-screen h-screen items-center justify-center z-50 bg-black/60 backdrop-blur-sm">
       <div className="w-full max-w-[420px] sm:max-w-[600px] lg:max-w-[984px] p-4 max-h-[90vh] overflow-auto">
@@ -19,7 +19,6 @@ export default function MovieDetailsModal({ movie, onClose }) {
               <span className="block text-base text-[#9fa0a4] dark:text-[#575A6E] my-3">
                 {movie.genre}
               </span>
-              <div></div>
             </div>
             <p className="text-sm lg:text-base mb-8 lg:mb-16">
               {movie.description}
@@ -28,6 +27,7 @@ export default function MovieDetailsModal({ movie, onClose }) {
               <button
                 type="button"
                 className="bg-primary rounded-lg py-2 px-5 flex items-center justify-center gap-2 text-[#171923] font-semibold text-sm"
+                onClick={(e) => onCartAdd(e, movie)}
               >
                 <img src={tag} alt="" width="16" height="16" />
                 <span>$ {movie.price} | Add to Cart</span>

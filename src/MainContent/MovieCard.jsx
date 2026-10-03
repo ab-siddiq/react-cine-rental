@@ -1,13 +1,15 @@
 import { useState } from "react";
-import MovieDetailsModal from "../assets/MovieDetailsModal";
 import tag from "../assets/tag.svg";
 import { getImageUrl } from "../assets/uttitlities/utility";
+import MovieDetailsModal from "./MovieDetailsModal";
 import Rating from "./Rating";
+import { useContext } from "react";
+import { MovieContext } from "../context";
 
 export default function MovieCard({ movie }) {
   const [showModal, setShowModal] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState(null);
-
+  const { state, dispatch } = useContext(MovieContext);
   function handleModalClose() {
     setSelectedMovie(null);
     setShowModal(false);
@@ -17,11 +19,27 @@ export default function MovieCard({ movie }) {
     setSelectedMovie(movie);
     setShowModal(true);
   }
+  function handleAddToCart(e, movie) {
+    e.stopPropagation();
+    const found = state.cartData.find((item) => item.id === movie.id);
+    if (!found) {
+      dispatch({
+        type: "ADD_TO_CART",
+        payLoad: { ...movie },
+      });
+    } else {
+      console.error(`The movie ${movie.title} is already in the cart.`);
+    }
+  }
 
   return (
     <>
       {showModal && (
-        <MovieDetailsModal movie={selectedMovie} onClose={handleModalClose} />
+        <MovieDetailsModal
+          movie={selectedMovie}
+          onClose={handleModalClose}
+          onCartAdd={handleAddToCart}
+        />
       )}
 
       <figure className="p-4 border border-black/10 shadow-sm dark:border-white/10 rounded-xl">
@@ -50,9 +68,7 @@ export default function MovieCard({ movie }) {
             <button
               type="button"
               className="bg-primary rounded-lg py-2 px-5 flex items-center justify-center gap-2 text-[#171923] font-semibold text-sm w-full"
-              onClick={(event) => {
-                event.stopPropagation();
-              }}
+              onClick={(e) => handleAddToCart(e, movie)}
             >
               <img src={tag} width="16" height="16" alt="" />
               <span>$ {movie.price} | Add to Cart</span>
