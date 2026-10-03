@@ -3,12 +3,16 @@ import deleteIcon from "../assets/delete.svg";
 import checkoutIcon from "../assets/icons/checkout.svg";
 import { getImageUrl } from "../assets/uttitlities/utility";
 import { MovieContext } from "../context";
+import { toast } from "react-toastify";
 export default function CartDetails({ onClose }) {
   const { state, dispatch } = useContext(MovieContext);
   function handleDeleteCart(e, item) {
     e.preventDefault();
 
     dispatch({ type: "REMOVE_FROM_CART", payload: item });
+    toast.success(`${item.title} has been removed from the cart.`, {
+      position: "top-right",
+    });
   }
   return (
     <div className="fixed top-0 left-0 flex w-screen h-screen items-center justify-center z-50 bg-black/60 backdrop-blur-sm">

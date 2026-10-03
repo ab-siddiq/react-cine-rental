@@ -1,4 +1,5 @@
 import { useReducer, useState } from "react";
+import { ToastContainer } from "react-toastify";
 import { DarkModeContext, MovieContext } from "./context";
 import Footer from "./Footer";
 import Header from "./Header";
@@ -16,6 +17,7 @@ function App() {
             <MainContent />
             <Footer />
           </div>
+          <ToastContainer />
         </MovieContext.Provider>
       </DarkModeContext.Provider>
     </>

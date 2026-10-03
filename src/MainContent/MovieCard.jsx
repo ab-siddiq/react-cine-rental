@@ -1,11 +1,10 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { toast } from "react-toastify";
 import tag from "../assets/tag.svg";
 import { getImageUrl } from "../assets/uttitlities/utility";
+import { MovieContext } from "../context";
 import MovieDetailsModal from "./MovieDetailsModal";
 import Rating from "./Rating";
-import { useContext } from "react";
-import { MovieContext } from "../context";
-
 export default function MovieCard({ movie }) {
   const [showModal, setShowModal] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState(null);
@@ -27,7 +26,13 @@ export default function MovieCard({ movie }) {
         type: "ADD_TO_CART",
         payLoad: { ...movie },
       });
+      toast.success(`${movie.title} has been added to the cart.`, {
+        position: "top-right",
+      });
     } else {
+      toast.error(`The movie ${movie.title} is already in the cart.`, {
+        position: "top-right",
+      });
       console.error(`The movie ${movie.title} is already in the cart.`);
     }
   }
